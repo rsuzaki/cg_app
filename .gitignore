@@ -1,0 +1,6 @@
+syntax: glob
+
+.vs
+x64
+*.user
+

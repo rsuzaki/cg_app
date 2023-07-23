@@ -18,11 +18,11 @@ public:
   // タッチ型
   enum Touch
   {
-    TouchNone, // 何も押していない
+    TouchNone = 0, // 何も押していない
 
-    TouchLeft,   // マウス左ボタン
-    TouchMiddle, // マウス中ボタン
-    TouchRight,  // マウス右ボタン
+    TouchLeft = 1,   // マウス左ボタン
+    TouchMiddle = 2, // マウス中ボタン
+    TouchRight = 4,  // マウス右ボタン
   };
 
 private:

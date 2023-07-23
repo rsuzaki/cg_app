@@ -12,7 +12,7 @@
 void Widget::OnResize( int width, int height )
 {
   // ウィンドウがリサイズした時のイベントを書く
-  std::wstring s = std::to_wstring( width ) + L"," + std::to_wstring( height );
+  std::wstring s = L"w " + std::to_wstring( width ) + L" h " + std::to_wstring( height );
 
   // ウィンドウの幅と高さをタイトルバーに表示する
   SetWindowTitle( s );
@@ -40,14 +40,14 @@ void Widget::OnTouchMove( Touch touch, int x, int y )
 void Widget::OnTouchPress( Touch touch, int x, int y )
 {
   // マウスの左ボタンを押した時
-  if (touch == TouchLeft)
+  if (touch & TouchLeft)
   {
     Fill( 0xFF00FF00 );
     Display();
   }
 
   // マウスの右ボタンを押した時
-  if (touch == TouchRight)
+  if (touch & TouchRight)
   {
     std::wstring filePath = GetOpenFilePath();
     SetWindowTitle( filePath );

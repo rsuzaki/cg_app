@@ -110,9 +110,9 @@ LRESULT CGWidget::WndProc( HINSTANCE hInst, HWND hWnd, UINT message, WPARAM wPar
   const int y = HIWORD(lParam);
   
   Touch touch = TouchNone;
-  if (wParam & MK_LBUTTON) touch = TouchLeft;
-  if (wParam & MK_MBUTTON) touch = TouchMiddle;
-  if (wParam & MK_RBUTTON) touch = TouchRight;
+  if (wParam & MK_LBUTTON) touch = static_cast<Touch>(touch | TouchLeft);
+  if (wParam & MK_MBUTTON) touch = static_cast<Touch>(touch | TouchMiddle);
+  if (wParam & MK_RBUTTON) touch = static_cast<Touch>(touch | TouchRight);
 
   switch (message)
   {

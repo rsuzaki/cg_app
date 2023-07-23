@@ -6,7 +6,7 @@ VisualStudio (Visual C++) の 「Windows デスクトップアプリケーショ
 
 Visual Studio の新規作成から「Windows デスクトップアプリケーション」を選び、Win32アプリケーションを作成します。
 
-「ソリューションエクスプローラー」を右クリックして、cg_widget.h と cg_widget.cpp をプロジェクトに追加します。
+「ソリューションエクスプローラー」を右クリックして、「追加 > 既存の項目」を選び、cg_widget.h と cg_widget.cpp をプロジェクトに追加します。
 
 「ソリューションエクスプローラー」に "プロジェクト名".h というヘッダファイルが出来ているので、ダブルクリックで開きます。
 ```
@@ -118,5 +118,61 @@ WCHAR szTitle[MAX_LOADSTRING];                  // タイトル バーのテキ�
 WCHAR szWindowClass[MAX_LOADSTRING];            // メイン ウィンドウ クラス名
 ```
 といった具合に、CGWidget クラスを継承したメソッドを実装します。
+
 OnResize は、ウィンドウがリサイズした時に呼ばれるイベントです。
+
 OnTouchPress は、マウスボタンを押した時などに発生するイベントです。
+
+このように、何かしらのイベントが発生した際の処理を実装し、処理を行うためのクラスになっています。
+
+最後に、WndProc を書き換えます。
+```
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+    case WM_COMMAND:
+        {
+            int wmId = LOWORD(wParam);
+            // 選択されたメニューの解析:
+            switch (wmId)
+            {
+            case IDM_ABOUT:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+                break;
+            case IDM_EXIT:
+                DestroyWindow(hWnd);
+                break;
+            default:
+                return DefWindowProc(hWnd, message, wParam, lParam);
+            }
+        }
+        break;
+    case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+            // TODO: HDC を使用する描画コードをここに追加してください...
+            EndPaint(hWnd, &ps);
+        }
+        break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
+}
+```
+というコードがあるので、ここを、
+```
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+  //////////////////////////////////////////////
+  // [変更点3] widget 側で WndProc を処理する
+  //////////////////////////////////////////////
+  return widget.WndProc( hInst, hWnd, message, wParam, lParam );
+}
+```
+と書き換えます。Win32 プログラミングで面倒臭い、WndProc の処理を CGWidget クラスに任せ、必要なイベントだけを実装するというのがコンセプトです。

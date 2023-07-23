@@ -88,6 +88,16 @@ public:
   virtual void OnTouchPress( Touch touch, int x, int y );
   virtual void OnTouchMove( Touch touch, int x, int y );
   virtual void OnTouchRelease( Touch touch, int x, int y );
+
+  // ダブルクリックイベント
+  //
+  // - デフォルトでは使用できない
+  // - MyRegisterClass の
+  // - wcex.style          = CS_HREDRAW | CS_VREDRAW;
+  // - を
+  // - wcex.style          = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+  // - こう書き換え、ダブルクリックを有効にする必要がある
+  virtual void OnDoubleClick( Touch touch, int x, int y );
 };
 
 } ///< neet

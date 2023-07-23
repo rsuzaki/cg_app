@@ -168,6 +168,22 @@ LRESULT CGWidget::WndProc( HINSTANCE hInst, HWND hWnd, UINT message, WPARAM wPar
     ////////////////////////
   case WM_MOUSEMOVE:
     OnTouchMove( touch, x, y );
+    break;
+
+    ////////////////////////
+    // ダブルクリック
+    ////////////////////////
+  case WM_LBUTTONDBLCLK:
+    OnDoubleClick( TouchLeft, x, y );
+    break;
+
+  case WM_MBUTTONDBLCLK:
+    OnDoubleClick( TouchMiddle, x, y );
+    break;
+
+  case WM_RBUTTONDBLCLK:
+    OnDoubleClick( TouchRight, x, y );
+    break;
 
     ////////////////////////
     // 描画イベント発生時
@@ -260,6 +276,11 @@ void CGWidget::OnTouchMove( CGWidget::Touch touch, int x, int y )
 
 ////////////////////////////////////////////////////////////////////////////////
 void CGWidget::OnTouchRelease( CGWidget::Touch touch, int x, int y )
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void CGWidget::OnDoubleClick( Touch touch, int x, int y )
 {
 }
 

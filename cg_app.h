@@ -13,4 +13,5 @@ public:
   void OnPaint( HDC hdc );
   void OnTouchPress( Touch touch, int x, int y );
   void OnTouchMove( Touch touch, int x, int y );
+  void OnDoubleClick( Touch touch, int x, int y );
 };

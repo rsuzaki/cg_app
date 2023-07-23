@@ -191,3 +191,18 @@ CGWidget は、グラフィックスプログラミング学習のために用�
 
 Fill( uint32_t color )　メソッドを使えば、バッファを単色で塗りつぶす事ができます。
 
+# ダブルクリックに対応する
+
+CGWidget の OnDoubleClick イベントは、初期状態ではイベントが発生せず、処理できません。
+```
+ATOM MyRegisterClass(HINSTANCE hInstance)
+```
+の
+```
+wcex.style          = CS_HREDRAW | CS_VREDRAW;
+```
+を
+```
+wcex.style          = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+```
+と書き換え、ウィンドウからダブルクリックメッセージが届くように指定してください。

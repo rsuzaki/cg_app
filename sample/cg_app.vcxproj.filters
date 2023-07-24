@@ -30,7 +30,7 @@
     <ClInclude Include="cg_app.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="cg_widget.h">
+    <ClInclude Include="..\cg_widget\cg_widget.h">
       <Filter>lib</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="cg_app.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="cg_widget.cpp">
+    <ClCompile Include="..\cg_widget\cg_widget.cpp">
       <Filter>lib</Filter>
     </ClCompile>
   </ItemGroup>
